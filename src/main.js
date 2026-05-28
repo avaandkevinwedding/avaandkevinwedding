@@ -250,6 +250,7 @@ function wireNoteForm() {
     event.preventDefault();
     const note = message.value.trim();
     if (!note) {
+      if (status) status.textContent = 'Write a note first, then tap Send note.';
       message.focus();
       return;
     }
@@ -268,14 +269,16 @@ function wireNoteForm() {
         body: JSON.stringify({
           _subject: 'Wedding website note for Ava and Kevin',
           _template: 'table',
+          _captcha: 'false',
           message: note,
         }),
       });
 
-      if (!response.ok) throw new Error('Note submission failed.');
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.success === false) throw new Error(data.message || 'Note submission failed.');
 
       form.reset();
-      if (status) status.textContent = 'Your note has been sent. Thank you.';
+      if (status) status.textContent = 'Note sent. Thank you.';
     } catch (error) {
       const subject = encodeURIComponent('Wedding website note for Ava and Kevin');
       const body = encodeURIComponent(`A note from the wedding website:\n\n${note}`);

@@ -365,12 +365,13 @@
 
         <section class="section content-section note-section" id="note" data-content-section aria-labelledby="note-title" hidden>
         <div class="section-inner note-inner">
-          <form class="note-form" action="https://formsubmit.co/avaandkevin8@gmail.com" method="POST" aria-label="Leave a note for the couple" data-note-form>
+          <form class="note-form" action="https://formsubmit.co/avaandkevin8@gmail.com" method="POST" autocomplete="off" novalidate aria-label="Leave a note for the couple" data-note-form>
             <input type="hidden" name="_subject" value="Wedding website note for Ava and Kevin">
             <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
             <input class="note-honey" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
             <label id="note-title" for="couple-note">Leave a note for the couple</label>
-            <textarea id="couple-note" name="message" rows="7" placeholder="Write your note here." required></textarea>
+            <textarea id="couple-note" name="message" rows="7" placeholder="Write your note here." autocomplete="off"></textarea>
             <button type="submit">Send note</button>
             <p class="note-status" data-note-status aria-live="polite"></p>
           </form>
