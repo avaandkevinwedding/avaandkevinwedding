@@ -1,0 +1,23 @@
+{
+  "name": "wedding-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Ava and Kevin wedding website for GitHub Pages.",
+  "scripts": {
+    "photos": "node scripts/build-photos.mjs",
+    "dev": "npm run photos && vite --host 127.0.0.1",
+    "build": "npm run photos && vite build",
+    "build:pages": "vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "keywords": [],
+  "author": "Ava and Kevin",
+  "license": "UNLICENSED",
+  "type": "module",
+  "devDependencies": {
+    "exifr": "^7.1.3",
+    "heic-convert": "^2.1.0",
+    "sharp": "^0.34.5",
+    "vite": "^8.0.14"
+  }
+}
