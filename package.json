@@ -15,6 +15,8 @@
   "license": "UNLICENSED",
   "type": "module",
   "devDependencies": {
+    "@emnapi/core": "^1.10.0",
+    "@emnapi/runtime": "^1.10.0",
     "exifr": "^7.1.3",
     "heic-convert": "^2.1.0",
     "sharp": "^0.34.5",
