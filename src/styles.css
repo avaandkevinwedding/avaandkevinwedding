@@ -868,6 +868,10 @@ dd {
   font: inherit;
 }
 
+.note-honey {
+  display: none;
+}
+
 .note-form button {
   margin-top: 12px;
   padding: 9px 15px;
@@ -875,6 +879,18 @@ dd {
   background: var(--cedar);
   border: 0;
   border-radius: 7px;
+}
+
+.note-form button:disabled {
+  cursor: progress;
+  opacity: 0.72;
+}
+
+.note-status {
+  min-height: 22px;
+  margin: 10px 0 0;
+  color: rgba(44, 48, 39, 0.76);
+  font-size: 16px;
 }
 
 .site-footer {

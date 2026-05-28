@@ -13,6 +13,7 @@ let activeDialogPhotos = [];
 let activeDialogIndex = 0;
 let activeDialogGalleryId = '';
 const noteRecipient = 'avaandkevin8@gmail.com';
+const noteEndpoint = `https://formsubmit.co/ajax/${noteRecipient}`;
 
 const dialog = document.querySelector('#photo-dialog');
 const dialogImage = dialog?.querySelector('[data-dialog-image]');
@@ -240,19 +241,49 @@ function wireSectionNavigation() {
 function wireNoteForm() {
   const form = document.querySelector('[data-note-form]');
   const message = form?.querySelector('#couple-note');
-  if (!form || !message) return;
+  const status = form?.querySelector('[data-note-status]');
+  const button = form?.querySelector('button[type="submit"]');
+  const honeypot = form?.querySelector('input[name="_honey"]');
+  if (!form || !message || !button) return;
 
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const note = message.value.trim();
     if (!note) {
       message.focus();
       return;
     }
+    if (honeypot?.value) return;
 
-    const subject = encodeURIComponent('Wedding website note for Ava and Kevin');
-    const body = encodeURIComponent(`A note from the wedding website:\n\n${note}`);
-    window.location.href = `mailto:${noteRecipient}?subject=${subject}&body=${body}`;
+    button.disabled = true;
+    if (status) status.textContent = 'Sending your note...';
+
+    try {
+      const response = await fetch(noteEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+        body: JSON.stringify({
+          _subject: 'Wedding website note for Ava and Kevin',
+          _template: 'table',
+          message: note,
+        }),
+      });
+
+      if (!response.ok) throw new Error('Note submission failed.');
+
+      form.reset();
+      if (status) status.textContent = 'Your note has been sent. Thank you.';
+    } catch (error) {
+      const subject = encodeURIComponent('Wedding website note for Ava and Kevin');
+      const body = encodeURIComponent(`A note from the wedding website:\n\n${note}`);
+      if (status) status.textContent = 'Opening an email draft so the note can still be sent.';
+      window.location.href = `mailto:${noteRecipient}?subject=${subject}&body=${body}`;
+    } finally {
+      button.disabled = false;
+    }
   });
 }
 

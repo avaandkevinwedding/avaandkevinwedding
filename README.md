@@ -37,4 +37,4 @@ https://avaandkevinwedding.github.io/avaandkevinwedding/
 
 Only optimized gallery assets in `public/photos/` should be committed. The original `Photos/` folder is ignored so private source images and metadata are not published to GitHub.
 
-The Leave a Note form opens an email draft addressed to `avaandkevin8@gmail.com`. Static GitHub Pages cannot send email in the background without adding a form service or backend.
+The Leave a Note form submits through FormSubmit and sends notes to `avaandkevin8@gmail.com`. On the first real submission, FormSubmit may send an activation email to that inbox before forwarding notes.
